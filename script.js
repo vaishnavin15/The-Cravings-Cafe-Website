@@ -1,3 +1,32 @@
+
+//Theme toggle button
+document.addEventListener("DOMContentLoaded", function () {
+    const themeButton = document.querySelector(".themebutton");
+    const themeIcon = themeButton.querySelector("i");
+  
+    // Check for saved theme in localStorage
+    let currentTheme = localStorage.getItem("theme") || "dark";
+    applyTheme(currentTheme);
+
+    themeButton.addEventListener("click", function () {
+        currentTheme = currentTheme === "dark" ? "light" : "dark";
+        applyTheme(currentTheme);
+        localStorage.setItem("theme", currentTheme); // Save theme preference
+    });
+
+    function applyTheme(theme) {
+        if (theme === "light") {
+            document.documentElement.classList.add("light-theme");
+            themeIcon.classList.replace("bxs-sun", "bxs-moon"); // Change icon
+        } else {
+            document.documentElement.classList.remove("light-theme");
+            themeIcon.classList.replace("bxs-moon", "bxs-sun"); // Change icon
+        }
+    }
+});
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
     const header = document.querySelector("header");
     const heroSliderNextBtn = document.querySelector("[data-next-btn]");
@@ -49,3 +78,37 @@ document.addEventListener('DOMContentLoaded', function() {
         autoSlide();
     }
 });
+
+//Breakfast menu display
+document.addEventListener("DOMContentLoaded", function () {
+    const breakfastBtn = document.querySelector("#breakfast-btn");
+    const menuCardContainer = document.querySelector(".menu-card-container");
+
+    menuCardContainer.style.display = "none"; // Initially hidden
+
+    breakfastBtn.addEventListener("click", function () {
+        if (menuCardContainer.style.display === "none") {
+            menuCardContainer.style.display = "block"; 
+        } else {
+            menuCardContainer.style.display = "none"; 
+        }
+    });
+});
+//Starter menu display
+document.addEventListener("DOMContentLoaded", function () {
+    const starterBtn = document.querySelector("#starter-btn");
+    const starterContainer = document.querySelector(".starter-container");
+
+    starterContainer.style.display = "none"; // Initially hidden
+
+    starterBtn.addEventListener("click", function () {
+        if (starterContainer.style.display === "none") {
+            starterContainer.style.display = "block"; 
+        } else {
+            starterContainer.style.display = "none"; 
+        }
+    });
+});
+
+
+
