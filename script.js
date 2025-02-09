@@ -79,36 +79,28 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-//Breakfast menu display
 document.addEventListener("DOMContentLoaded", function () {
-    const breakfastBtn = document.querySelector("#breakfast-btn");
-    const menuCardContainer = document.querySelector(".menu-card-container");
+    const buttons = document.querySelectorAll(".menu-option");
+    const sections = document.querySelectorAll(".menu-card-container, .starter-container, .maincourse-container,.desserts-container,.mocktails-container");
 
-    menuCardContainer.style.display = "none"; // Initially hidden
+    buttons.forEach(button => {
+        button.addEventListener("click", function () {
+            // Hide all menu sections
+            sections.forEach(section => section.style.display = "none");
 
-    breakfastBtn.addEventListener("click", function () {
-        if (menuCardContainer.style.display === "none") {
-            menuCardContainer.style.display = "block"; 
-        } else {
-            menuCardContainer.style.display = "none"; 
-        }
+            // Show the selected section
+            if (this.id === "breakfast-btn") {
+                document.querySelector(".menu-card-container").style.display = "block";
+            } else if (this.id === "starter-btn") {
+                document.querySelector(".starter-container").style.display = "block";
+            } else if (this.id === "maincourse-btn") {
+                document.querySelector(".maincourse-container").style.display = "block";
+            }else if(this.id ==="desserts-btn"){
+                document.querySelector(".desserts-container").style.display ="block";
+            }else if(this.id==="mocktails-btn"){
+                document.querySelector(".mocktails-container").style.display ="block";
+
+            }
+        });
     });
 });
-//Starter menu display
-document.addEventListener("DOMContentLoaded", function () {
-    const starterBtn = document.querySelector("#starter-btn");
-    const starterContainer = document.querySelector(".starter-container");
-
-    starterContainer.style.display = "none"; // Initially hidden
-
-    starterBtn.addEventListener("click", function () {
-        if (starterContainer.style.display === "none") {
-            starterContainer.style.display = "block"; 
-        } else {
-            starterContainer.style.display = "none"; 
-        }
-    });
-});
-
-
-
