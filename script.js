@@ -1,3 +1,19 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const menuIcon = document.getElementById("menu-icon");
+    const navLinks = document.querySelector(".nav-links");
+
+    // Toggle menu on icon click
+    menuIcon.addEventListener("click", function () {
+        navLinks.classList.toggle("active");
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener("click", function (event) {
+        if (!menuIcon.contains(event.target) && !navLinks.contains(event.target)) {
+            navLinks.classList.remove("active");
+        }
+    });
+});
 
 //Theme toggle button
 document.addEventListener("DOMContentLoaded", function () {
@@ -25,6 +41,25 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    const navLinks = document.querySelectorAll(".nav-links a");
+
+    navLinks.forEach(link => {
+        link.addEventListener("click", function (e) {
+            e.preventDefault(); // Prevent default anchor behavior
+
+            const targetId = this.getAttribute("href").substring(1); // Get the target section ID
+            const targetSection = document.getElementById(targetId);
+
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start" // Scroll to the top of the section
+                });
+            }
+        });
+    });
+});
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -81,26 +116,208 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener("DOMContentLoaded", function () {
     const buttons = document.querySelectorAll(".menu-option");
-    const sections = document.querySelectorAll(".menu-card-container, .starter-container, .maincourse-container,.desserts-container,.mocktails-container");
+    const sections = document.querySelectorAll(".menu-card-container, .starter-container, .maincourse-container, .desserts-container, .mocktails-container");
+    const menuCards = document.querySelectorAll(".menu-cards"); // Menu cards that trigger buttons
 
+    // Function to show the selected section
+    function showSection(sectionClass) {
+        sections.forEach(section => section.style.display = "none"); // Hide all sections
+        document.querySelector(sectionClass).style.display = "block"; // Show selected section
+    }
+
+    // Set breakfast menu as default visible
+    showSection(".menu-card-container");
+
+    // Add event listener to menu-option buttons
     buttons.forEach(button => {
         button.addEventListener("click", function () {
-            // Hide all menu sections
-            sections.forEach(section => section.style.display = "none");
-
-            // Show the selected section
             if (this.id === "breakfast-btn") {
-                document.querySelector(".menu-card-container").style.display = "block";
+                showSection(".menu-card-container");
             } else if (this.id === "starter-btn") {
-                document.querySelector(".starter-container").style.display = "block";
+                showSection(".starter-container");
             } else if (this.id === "maincourse-btn") {
-                document.querySelector(".maincourse-container").style.display = "block";
-            }else if(this.id ==="desserts-btn"){
-                document.querySelector(".desserts-container").style.display ="block";
-            }else if(this.id==="mocktails-btn"){
-                document.querySelector(".mocktails-container").style.display ="block";
-
+                showSection(".maincourse-container");
+            } else if (this.id === "desserts-btn") {
+                showSection(".desserts-container");
+            } else if (this.id === "mocktails-btn") {
+                showSection(".mocktails-container");
             }
         });
+    });
+
+    // Trigger menu-option buttons when clicking on menu cards
+    menuCards.forEach(card => {
+        card.addEventListener("click", function () {
+            buttons.forEach(button => button.click()); 
+        });
+    });
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const images = document.querySelectorAll(".about-image img");
+    let index = 0;
+
+    function rotateImages() {
+        images.forEach((img, i) => {
+            img.style.animation = "none"; // Reset animation
+        });
+
+        setTimeout(() => {
+            images[index].style.zIndex = 1;
+            images[index].style.opacity = 0.6;
+            images[index].style.transform = "translate(60px, 40px)";
+
+            let next = (index + 1) % images.length;
+            images[next].style.zIndex = 3;
+            images[next].style.opacity = 1;
+            images[next].style.transform = "translate(0, 0)";
+
+            let mid = (index + 2) % images.length;
+            images[mid].style.zIndex = 2;
+            images[mid].style.opacity = 0.8;
+            images[mid].style.transform = "translate(30px, 20px)";
+
+            index = next;
+        }, 100); // Small delay before applying new styles
+    }
+
+    setInterval(rotateImages, 3000); // Change every 3 seconds
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const bookTableBtns = document.querySelectorAll(".bookatable, #bookatable, #bookatable2");
+    const popup = document.getElementById("popup");
+    const closeBtn = document.querySelector(".close-btn");
+
+    bookTableBtns.forEach(btn => {
+        if (btn) {  
+            btn.addEventListener("click", function () {
+                popup.style.display = "flex";
+            });
+        }
+    });
+
+    if (closeBtn) { 
+        closeBtn.addEventListener("click", function () {
+            popup.style.display = "none";
+        });
+    }
+
+    window.addEventListener("click", function (event) {
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    let cart = [];
+    const cartIcon = document.getElementById("cart-icon");
+    const cartPopup = document.getElementById("cart-popup");
+    const closeCart = document.getElementById("close-cart");
+    const cartItems = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+    const orderNow = document.getElementById("order-now");
+    const orderSuccess = document.getElementById("order-success");
+
+    // Show Cart Popup when clicking on cart icon
+    cartIcon.addEventListener("click", function () {
+        cartPopup.style.display = "block";
+    });
+
+    // Close Cart Popup
+    closeCart.addEventListener("click", function () {
+        cartPopup.style.display = "none";
+    });
+
+    // Add to Cart Functionality
+    document.querySelectorAll(".add-to-cart").forEach(button => {
+        button.addEventListener("click", function () {
+            const itemName = this.getAttribute("data-name");
+            const itemPrice = parseFloat(this.getAttribute("data-price"));
+            const msgSpan = this.nextElementSibling;
+
+            const existingItem = cart.find(item => item.name === itemName);
+            if (existingItem) {
+                existingItem.quantity++;
+                msgSpan.textContent = `Quantity: ${existingItem.quantity}`;
+            } else {
+                cart.push({ name: itemName, price: itemPrice, quantity: 1 });
+                msgSpan.textContent = "Item added!";
+            }
+
+            updateCart();
+        });
+    });
+
+    // Update Cart Display
+    function updateCart() {
+        cartItems.innerHTML = "";
+        let total = 0;
+
+        cart.forEach((item, index) => {
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+                <td>${item.name}</td>
+                <td>
+                    <button class="qty-btn decrease" data-index="${index}">-</button>
+                    ${item.quantity}
+                    <button class="qty-btn increase" data-index="${index}">+</button>
+                </td>
+                <td>$${(item.price * item.quantity).toFixed(2)}</td>
+                <td><button class="delete-btn" data-index="${index}">Remove</button></td>
+            `;
+
+            cartItems.appendChild(row);
+            total += item.price * item.quantity;
+        });
+
+        cartTotal.textContent = total.toFixed(2);
+
+        // Quantity Increase / Decrease
+        document.querySelectorAll(".increase").forEach(button => {
+            button.addEventListener("click", function () {
+                const index = this.getAttribute("data-index");
+                cart[index].quantity++;
+                updateCart();
+            });
+        });
+
+        document.querySelectorAll(".decrease").forEach(button => {
+            button.addEventListener("click", function () {
+                const index = this.getAttribute("data-index");
+                if (cart[index].quantity > 1) {
+                    cart[index].quantity--;
+                } else {
+                    cart.splice(index, 1); // Remove item if quantity reaches 0
+                }
+                updateCart();
+            });
+        });
+
+        // Delete Item
+        document.querySelectorAll(".delete-btn").forEach(button => {
+            button.addEventListener("click", function () {
+                const index = this.getAttribute("data-index");
+                cart.splice(index, 1); // Remove item
+                updateCart();
+            });
+        });
+    }
+
+    // Order Now Functionality
+    orderNow.addEventListener("click", function () {
+        if (cart.length === 0) {
+            orderSuccess.textContent = "Your cart is empty!";
+            orderSuccess.style.color = "red";
+        } else {
+            orderSuccess.textContent = "Order received at the restaurant!";
+            orderSuccess.style.display = "block";
+            orderSuccess.style.color = "green";
+            cart = [];
+            updateCart();
+        }
     });
 });
