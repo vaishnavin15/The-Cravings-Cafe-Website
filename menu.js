@@ -260,3 +260,5 @@ document.querySelectorAll(".menu-option").forEach((button) => {
 
 // Load Breakfast Menu by Default on Page Load
 document.addEventListener("DOMContentLoaded", () => generateMenu("breakfast"));
+
+

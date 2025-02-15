@@ -1,16 +1,20 @@
+
 document.addEventListener("DOMContentLoaded", function () {
     const menuIcon = document.getElementById("menu-icon");
     const navLinks = document.querySelector(".nav-links");
+    const topbar = document.querySelector(".topbar");
 
     // Toggle menu on icon click
     menuIcon.addEventListener("click", function () {
         navLinks.classList.toggle("active");
+        topbar.classList.toggle("active");
     });
 
     // Close menu when clicking outside
     document.addEventListener("click", function (event) {
-        if (!menuIcon.contains(event.target) && !navLinks.contains(event.target)) {
+        if (!menuIcon.contains(event.target) && !navLinks.contains(event.target) && !topbar.contains(event.target)) {
             navLinks.classList.remove("active");
+            topbar.classList.toggle("active");
         }
     });
 });
@@ -232,23 +236,24 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Add to Cart Functionality
-    document.querySelectorAll(".add-to-cart").forEach(button => {
-        button.addEventListener("click", function () {
-            const itemName = this.getAttribute("data-name");
-            const itemPrice = parseFloat(this.getAttribute("data-price"));
-            const msgSpan = this.nextElementSibling;
+    document.getElementById("menu-list").addEventListener("click", function (e) {
+        if (e.target.classList.contains("add-to-cart")) {
+            const button = e.target;
+            const itemName = button.getAttribute("data-name");
+            const itemPrice = parseFloat(button.getAttribute("data-price").replace('$', ''));
+            const msgSpan = button.nextElementSibling;
 
             const existingItem = cart.find(item => item.name === itemName);
             if (existingItem) {
                 existingItem.quantity++;
                 msgSpan.textContent = `Quantity: ${existingItem.quantity}`;
             } else {
-                cart.push({ name: itemName, price: itemPrice, quantity: 1 });
-                msgSpan.textContent = "Item added!";
+                cart.push({ name: itemName, price: itemPrice, quantity: 1, msgSpan: msgSpan });
+                msgSpan.textContent = "Quantity: 1";
             }
 
             updateCart();
-        });
+        }
     });
 
     // Update Cart Display
@@ -276,12 +281,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
         cartTotal.textContent = total.toFixed(2);
 
+        // Show empty cart message if no items
+        if (cart.length === 0) {
+            cartItems.innerHTML = "<tr><td colspan='4'>Your cart is empty</td></tr>";
+        }
+
         // Quantity Increase / Decrease
         document.querySelectorAll(".increase").forEach(button => {
             button.addEventListener("click", function () {
                 const index = this.getAttribute("data-index");
                 cart[index].quantity++;
                 updateCart();
+                updateMsgSpan(cart[index]); // Update cart-msg
             });
         });
 
@@ -290,10 +301,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 const index = this.getAttribute("data-index");
                 if (cart[index].quantity > 1) {
                     cart[index].quantity--;
+                    updateCart();
+                    updateMsgSpan(cart[index]); // Update cart-msg
                 } else {
+                    if (cart[index].msgSpan) {
+                        cart[index].msgSpan.textContent = ""; // Clear message
+                    }
                     cart.splice(index, 1); // Remove item if quantity reaches 0
+                    updateCart();
                 }
-                updateCart();
             });
         });
 
@@ -301,10 +317,20 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".delete-btn").forEach(button => {
             button.addEventListener("click", function () {
                 const index = this.getAttribute("data-index");
+                if (cart[index].msgSpan) {
+                    cart[index].msgSpan.textContent = ""; // Clear message
+                }
                 cart.splice(index, 1); // Remove item
                 updateCart();
             });
         });
+    }
+
+    // Function to update the cart-msg span when quantity changes
+    function updateMsgSpan(item) {
+        if (item.msgSpan) {
+            item.msgSpan.textContent = `Quantity: ${item.quantity}`;
+        }
     }
 
     // Order Now Functionality
@@ -312,12 +338,25 @@ document.addEventListener("DOMContentLoaded", function () {
         if (cart.length === 0) {
             orderSuccess.textContent = "Your cart is empty!";
             orderSuccess.style.color = "red";
+            orderSuccess.style.display = "block";
         } else {
             orderSuccess.textContent = "Order received at the restaurant!";
-            orderSuccess.style.display = "block";
             orderSuccess.style.color = "green";
+            orderSuccess.style.display = "block";
+            cart.forEach(item => {
+                if (item.msgSpan) {
+                    item.msgSpan.textContent = ""; // Clear message for all items
+                }
+            });
             cart = [];
             updateCart();
         }
+
+        // Hide success message after 3 seconds
+        setTimeout(() => {
+            orderSuccess.style.display = "none";
+        }, 5000);
     });
 });
+
+
