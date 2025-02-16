@@ -45,7 +45,7 @@ const menuData = {
         "Crispy vanilla waffles topped with fresh strawberries, bananas, and maple syrup!",
     },
   ],
-  starter: [
+  starters: [
     {
       name: "Paneer Tikka",
       price: "$15.00",
@@ -248,6 +248,9 @@ function generateMenu(category) {
   } else {
     menuContainer.innerHTML = "<p>No items available in this category.</p>";
   }
+
+  // Scroll to the menu section
+  document.getElementById("menu-display").scrollIntoView({ behavior: "smooth" });
 }
 
 // Event Listener for Menu Buttons
@@ -258,7 +261,21 @@ document.querySelectorAll(".menu-option").forEach((button) => {
   });
 });
 
+// Event Listener for Service Cards
+document.querySelectorAll(".service-card").forEach((card) => {
+  card.addEventListener("click", function () {
+    const categoryText = this.querySelector(".card-title a").textContent.toLowerCase();
+    let category;
+    switch (categoryText) {
+      case "main course":
+        category = "maincourse";
+        break;
+      default:
+        category = categoryText;
+    }
+    generateMenu(category);
+  });
+});
+
 // Load Breakfast Menu by Default on Page Load
 document.addEventListener("DOMContentLoaded", () => generateMenu("breakfast"));
-
-

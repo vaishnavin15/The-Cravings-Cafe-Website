@@ -47,7 +47,6 @@ body {
   padding: 5px 50px;
   background: var(--bg-color);
   color: var(--text-color);
-  /* border-bottom: 1px solid var(--second-color); */
   z-index: 1100;
   transition: all 0.5s ease;
   font-size: 12px;
@@ -90,12 +89,12 @@ body {
   transition: color 0.5s ease;
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .topbar {
     flex-direction: column;
     padding: 15px;
+    gap: -10px;
   }
-
   .separator {
     display: none;
   }
@@ -1184,6 +1183,7 @@ h3 a {
   }
   .contact-form,
   .contact-info {
+    margin-top: 5px;
     max-width: 100%;
   }
 }
@@ -1201,8 +1201,12 @@ h3 a {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   width: auto;
+  max-height: 80vh;
   display: none;
   z-index: 1000;
+  overflow-y: auto;
+  scrollbar-color: var(--main-color) var(--bg-color);
+  scrollbar-width: thin;
 }
 .cart-content {
   text-align: center;
