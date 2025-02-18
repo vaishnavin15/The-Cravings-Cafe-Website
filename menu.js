@@ -249,8 +249,6 @@ function generateMenu(category) {
     menuContainer.innerHTML = "<p>No items available in this category.</p>";
   }
 
-  // Scroll to the menu section
-  document.getElementById("menu-display").scrollIntoView({ behavior: "smooth" });
 }
 
 // Event Listener for Menu Buttons

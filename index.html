@@ -348,7 +348,7 @@
         </div>
         <div class="options">
           <button class="menu-option" data-category="breakfast">Breakfast</button>
-          <button class="menu-option" data-category="starter">Starter</button>
+          <button class="menu-option" data-category="starters">Starter</button>
           <button class="menu-option" data-category="maincourse">Main Course</button>
           <button class="menu-option" data-category="desserts">Desserts</button>
           <button class="menu-option" data-category="mocktails">Mocktails</button>
@@ -417,7 +417,7 @@
 
       <div class="form-group">
         <input type="time" required>
-        <select required>
+        <select class="select" required>
           <option value="" disabled selected>Number of Guests</option>
           <option value="1">1 Person</option>
           <option value="2">2 People</option>
@@ -427,7 +427,8 @@
         </select>
       </div>
       <textarea placeholder="Special Requests (Optional)" rows="3"></textarea>
-      <button type="submit">Reserve Now</button>
+      <button type="submit" id="reserve">Reserve Now</button>
+      <p id="reserve-success" class="success-msg"></p>
     </form>
 
   </div>

@@ -157,7 +157,7 @@ header.sticky {
   background: var(--main-color);
   border-radius: 3rem;
   box-shadow: #ff9f0d 0px 1px 25px;
-  margin-left: 40px;
+  margin-left: 60px;
 }
 .nav-icons i {
   vertical-align: middle;
@@ -225,14 +225,10 @@ header.sticky {
 
   }
   }
-  .nav-icons {
-    margin-left: 0;
-  }
+
   .button-group {
     display: none;
   }
-
-
 
 .nav-icons i:hover {
   transform: scale(1.1);
@@ -1054,7 +1050,7 @@ h3 a {
   border: 1px solid var(--main-color);
   border-radius: 5px;
   background: transparent;
-  color: var(--text-color);
+  color: var(--second-color);
 }
 
 .reservation-form textarea {
@@ -1080,6 +1076,14 @@ h3 a {
 
 .reservation-form button:hover {
   transform: scale(1.05);
+}
+
+#reserve-success{
+  color: green;
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 10px;
+  display: none;
 }
 
 /* Responsive */
@@ -1126,6 +1130,7 @@ h3 a {
   border: 1px solid var(--main-color);
   border-radius: 5px;
   background: transparent;
+  color: var(--text-color);
 }
 .contact-form .btn {
   background: var(--main-color);
@@ -1204,18 +1209,17 @@ h3 a {
   max-height: 80vh;
   display: none;
   z-index: 1000;
-  overflow-y: auto;
+  overflow-y: scroll;
   scrollbar-color: var(--main-color) var(--bg-color);
   scrollbar-width: thin;
 }
 .cart-content {
   text-align: center;
 }
-
 .close {
   position: absolute;
   top: 10px;
-  right: 15px;
+  right: 5px;
   font-size: 20px;
   cursor: pointer;
 }

@@ -1,4 +1,5 @@
 
+  
 document.addEventListener("DOMContentLoaded", function () {
     const menuIcon = document.getElementById("menu-icon");
     const navLinks = document.querySelector(".nav-links");
@@ -24,7 +25,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const themeButton = document.querySelector(".themebutton");
     const themeIcon = themeButton.querySelector("i");
   
-    // Check for saved theme in localStorage
     let currentTheme = localStorage.getItem("theme") || "dark";
     applyTheme(currentTheme);
 
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (targetSection) {
                 targetSection.scrollIntoView({
                     behavior: "smooth",
-                    block: "start" // Scroll to the top of the section
+                    block: "start"
                 });
             }
         });
@@ -193,16 +193,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const bookTableBtns = document.querySelectorAll(".bookatable, #bookatable, #bookatable2");
     const popup = document.getElementById("popup");
     const closeBtn = document.querySelector(".close-btn");
+    const reserve = document.getElementById("reserve");
+    const reservesuccess = document.getElementById("reserve-success");
+    const form = document.querySelector(".reservation-form");
 
+    // Open Popup
     bookTableBtns.forEach(btn => {
-        if (btn) {  
+        if (btn) {
             btn.addEventListener("click", function () {
                 popup.style.display = "flex";
             });
         }
     });
 
-    if (closeBtn) { 
+    if (closeBtn) {
         closeBtn.addEventListener("click", function () {
             popup.style.display = "none";
         });
@@ -213,7 +217,46 @@ document.addEventListener("DOMContentLoaded", function () {
             popup.style.display = "none";
         }
     });
+
+    if (reserve) {
+        reserve.addEventListener("click", function (event) {
+            event.preventDefault(); 
+
+            const inputs = form.querySelectorAll("input[required], select[required]");
+            let allFilled = true;
+
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    allFilled = false;
+                    input.style.border = "1px solid red"; // Highlight empty fields
+                } else {
+                    input.style.border = "1px solid var(--main-color)"; // Reset border if filled
+                }
+            });
+
+            // Show appropriate message
+            if (allFilled) {
+                reservesuccess.style.display = "block";
+                reservesuccess.textContent = "Your table has been reserved!";
+                reservesuccess.style.color = "green";
+                setTimeout(() => {
+                    reservesuccess.style.display = "none";
+                }, 5000);
+                form.reset(); 
+            } else {
+                reservesuccess.style.display = "block";
+                reservesuccess.textContent = "Please fill all required fields!";
+                reservesuccess.style.color = "red";
+                setTimeout(() => {
+                    reservesuccess.style.display = "none";
+                }, 5000);
+            }
+        });
+    }
 });
+
+
+
 
 document.addEventListener("DOMContentLoaded", function () {
     let cart = [];
