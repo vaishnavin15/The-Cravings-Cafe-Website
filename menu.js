@@ -93,19 +93,19 @@ const menuData = {
     { 
         name: "Veg Farmhouse Pizza", 
         price: "$14.00", 
-        image: "/assests/mc1.jpg", 
+        image: "assests/mc1.jpg", 
         description: "A cheesy delight loaded with fresh veggies, olives, and oregano on a crispy crust!" 
     },
     { 
         name: "Chicken Alfredo Pasta", 
         price: "$16.00", 
-        image: "/assests/mc2.jpg", 
+        image: "assests/mc2.jpg", 
         description: "Creamy Alfredo sauce, tender chicken, and parmesan tossed with silky fettuccine!" 
     },
     { 
         name: "Club Sandwich", 
         price: "$10.00", 
-        image: "/assests/mc3.jpg", 
+        image: "assests/mc3.jpg", 
         description: "Triple-layered toast stacked with chicken, lettuce, tomato, cheese, and a tangy mayo spread!" 
     },
     { 
@@ -117,13 +117,13 @@ const menuData = {
     { 
         name: "Chicken Lasagna", 
         price: "$17.00", 
-        image: "/assests/mc5.jpg", 
+        image: "assests/mc5.jpg", 
         description: "Layers of pasta, juicy chicken, rich marinara, and gooey cheese baked to perfection!" 
     },
     { 
         name: "Chicken Biryani Jar", 
         price: "$15.00", 
-        image: "/assests/mc6.jpg", 
+        image: "assests/mc6.jpg", 
         description: "Aromatic basmati rice, spiced chicken, caramelized onions, and saffron sealed in a jar!" 
     },
   ],
@@ -131,37 +131,37 @@ const menuData = {
     { 
         name: "Tiramisu", 
         price: "$10.00", 
-        image: "/assests/ds1.jpg", 
+        image: "assests/ds1.jpg", 
         description: "Layers of espresso-soaked sponge, creamy mascarpone, cocoa, and a hint of coffee liqueur!" 
     },
     { 
         name: "Berry Cheesecake", 
         price: "$13.00", 
-        image: "/assests/ds2.jpg", 
+        image: "assests/ds2.jpg", 
         description: "Velvety cheesecake topped with a fresh berry compote on a buttery biscuit crust!" 
     },
     { 
         name: "Biscoff Cheesecake", 
         price: "$10.50", 
-        image: "/assests/ds3.jpg", 
+        image: "assests/ds3.jpg", 
         description: "Smooth cheesecake infused with caramelized Biscoff spread on a crunchy biscuit base!" 
     },
     { 
         name: "Chocolate Brownie with Icecream", 
         price: "$9.00", 
-        image: "/assests/ds4.jpg", 
+        image: "assests/ds4.jpg", 
         description: "Fudgy chocolate brownie served warm with a scoop of vanilla ice cream!" 
     },
     { 
         name: "Nutella Hazelnut Cheesecake", 
         price: "$11.00", 
-        image: "/assests/ds5.jpg", 
+        image: "assests/ds5.jpg", 
         description: "Rich Nutella cheesecake loaded with crunchy hazelnuts on a chocolatey base!" 
     },
     { 
         name: "Chocolate Mini Cake", 
         price: "$7.50", 
-        image: "/assests/ds6.jpg", 
+        image: "assests/ds6.jpg", 
         description: "Moist chocolate sponge layered with ganache and dusted with cocoa!" 
     },
   ],
@@ -169,37 +169,37 @@ const menuData = {
     { 
         name: "Virgin Mojito", 
         price: "$5.00", 
-        image: "/assests/mk1.jpg", 
+        image: "assests/mk1.jpg", 
         description: "A refreshing blend of mint, lime, and soda!" 
     },
     { 
         name: "Blue Lagoon Mojito", 
         price: "$6.00", 
-        image: "/assests/mk2.jpg", 
+        image: "assests/mk2.jpg", 
         description: "A cool twist with blue curaçao syrup, lime, and mint!" 
     },
     { 
         name: "Citrus Mango Splash", 
         price: "$6.50", 
-        image: "/assests/mk3.jpg", 
+        image: "assests/mk3.jpg", 
         description: "Mango meets orange in a citrusy burst of goodness!" 
     },
     { 
         name: "Tropical Orange Twist", 
         price: "$5.50", 
-        image: "/assests/mk4.jpg", 
+        image: "assests/mk4.jpg", 
         description: "A zesty and sweet mix of orange and pineapple!" 
     },
     { 
         name: "Cranberry Splash", 
         price: "$5.00", 
-        image: "/assests/mk5.jpg", 
+        image: "assests/mk5.jpg", 
         description: "A sweet-tart splash of cranberry and lime!" 
     },
     { 
         name: "Virgin Piña Colada", 
         price: "$6.00", 
-        image: "/assests/mk6.jpg", 
+        image: "assests/mk6.jpg", 
         description: "A creamy coconut and pineapple tropical treat!" 
     },
   ],
