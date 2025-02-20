@@ -1,24 +1,18 @@
 
-  
 document.addEventListener("DOMContentLoaded", function () {
     const menuIcon = document.getElementById("menu-icon");
     const navLinks = document.querySelector(".nav-links");
-    const topbar = document.querySelector(".topbar");
-
-    // Toggle menu on icon click
+  
     menuIcon.addEventListener("click", function () {
-        navLinks.classList.toggle("active");
-        topbar.classList.toggle("active");
+      navLinks.classList.toggle("active");
     });
-
-    // Close menu when clicking outside
+  
     document.addEventListener("click", function (event) {
-        if (!menuIcon.contains(event.target) && !navLinks.contains(event.target) && !topbar.contains(event.target)) {
-            navLinks.classList.remove("active");
-            topbar.classList.toggle("active");
-        }
+      if (!menuIcon.contains(event.target) && !navLinks.contains(event.target)) {
+        navLinks.classList.remove("active");
+      }
     });
-});
+  });
 
 //Theme toggle button
 document.addEventListener("DOMContentLoaded", function () {
@@ -104,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Auto slide
         const autoSlide = function() {
-            autoSlideInterval = setInterval(slideNext, 7000);
+            autoSlideInterval = setInterval(slideNext, 5000);
         }
 
         // Pause on hover
