@@ -62,3 +62,5 @@ Cravings Café website combines modern design with practical features, ensuring 
 For any queries or suggestions, feel free to reach out!
 - **GitHub:** [vaishnavin15](https://github.com/vaishnavin15)
 - **Email:** nalawadevaishnavi88@gmail.com
+
+## Designed and developed by Vaishnavi Nalawade.
